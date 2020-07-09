@@ -1,0 +1,10 @@
+.heading {
+  font-size: 300px;
+}
+h1 {
+  font-size: 6rem;
+
+  &.is-light {
+    color: white;
+  }
+}
