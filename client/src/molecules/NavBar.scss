@@ -1,0 +1,133 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  &__button {
+    z-index: 9999;
+    border: none;
+    background-color: white;
+    &.is-inverted {
+      background-color: black;
+    }
+  }
+
+  &__icon {
+    width: 1.5em;
+    height: 1.5em;
+    margin: 2em;
+  }
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 4em;
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    // &.is-inverted {
+    //   color: white;
+    // }
+  }
+
+  &__item {
+    display: inline;
+
+    &:first-child {
+      margin-right: 1em;
+
+      &:after {
+        content: "|";
+        margin-left: 1em;
+      }
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.sidemenu {
+  position: absolute;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: space-between;
+  left: 0;
+  background-color: white;
+  height: 100vh;
+  padding: 8em 3.5em 2em 3.5em;
+  color: black;
+  z-index: 9998;
+
+  &__list {
+    font-weight: 700;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 4rem;
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+
+  &__link,
+  &__bottom a {
+    text-decoration: none;
+    color: inherit;
+    &.active {
+      text-decoration: line-through;
+    }
+  }
+  &__link:not(.active):hover:before {
+    content: "+";
+  }
+  &__bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    :first-child {
+      margin-right: 6em;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .navbar {
+    &__button {
+      padding: 0;
+    }
+    &__icon {
+      margin: 1.75em;
+    }
+  }
+  .menu {
+    padding: 1.5em 1.75em;
+
+    &__item {
+      display: inline;
+
+      &:first-child {
+        margin-right: 1em;
+
+        &:after {
+          content: "|";
+          margin-left: 1em;
+        }
+      }
+    }
+  }
+
+  .sidemenu {
+    width: 100%;
+    padding: 6em 3.5em 2em 3.5em;
+  }
+}

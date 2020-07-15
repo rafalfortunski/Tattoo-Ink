@@ -1,0 +1,21 @@
+.card {
+  width: 100%;
+  &__link {
+    text-decoration: none;
+    color: inherit;
+  }
+  &__avatar {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    height: 200px;
+    filter: grayscale(1) contrast(120%);
+    margin-bottom: 0.5em;
+  }
+  &__details {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

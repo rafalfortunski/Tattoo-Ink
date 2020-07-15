@@ -1,0 +1,58 @@
+.artist {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 4em;
+  &__avatar {
+    width: 30vw;
+    height: 40vw;
+
+    &--is-red {
+      position: relative;
+      width: 30vw;
+      height: 40vw;
+      margin: 0 6em 4em 0;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50% 50%;
+      filter: saturate(140%);
+      &:after {
+        content: "";
+        position: absolute;
+        width: 30vw;
+        height: 40vw;
+        background: rgba(225, 0, 0, 0.55);
+      }
+    }
+  }
+}
+
+.details {
+  width: calc(70vw - 11em);
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__rating {
+    text-align: right;
+    font-weight: 700;
+  }
+  &__title {
+    margin: 0;
+  }
+  &__studio {
+    text-align: right;
+    align-self: flex-end;
+    h2 {
+      font-weight: 700;
+      font-size: 2.2rem;
+    }
+  }
+  &__numbers {
+    font-weight: 700;
+    margin: 2em 0;
+  }
+  &__bio {
+    margin: 1em 0 3em 0;
+  }
+}
