@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 import Gallery from "react-photo-gallery";
 import BackgroundImage from "../components/BackgroundImage/BackgroundImage";
@@ -9,85 +10,22 @@ import NavBar from "../molecules/NavBar";
 import Loader from "../components/Loader/Loader";
 import "./Artist.scss";
 
-const Artist = () => {
-  const photos = [
-    {
-      src:
-        "https://images.unsplash.com/photo-1562962230-16e4623d36e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
-      width: 4,
-      height: 3,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1507251217843-301ac7bf2afd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=426&q=80",
-      width: 5,
-      height: 3,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1557286581-db6c124a6e2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
-      width: 3,
-      height: 2,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1542851040-f68f85a424ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=753&q=80",
-      width: 3,
-      height: 4,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1542851040-f68f85a424ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=753&q=80",
-      width: 3,
-      height: 2,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1542851040-f68f85a424ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=753&q=80",
-      width: 3,
-      height: 3,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1542851040-f68f85a424ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=753&q=80",
-      width: 5,
-      height: 3,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1542851040-f68f85a424ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=753&q=80",
-      width: 4,
-      height: 3,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1542851040-f68f85a424ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=753&q=80",
-      width: 3,
-      height: 3,
-    },
-    {
-      src:
-        "https://images.unsplash.com/photo-1542851040-f68f85a424ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=753&q=80",
-      width: 2,
-      height: 3,
-    },
-  ];
+const Artist = ({ tattooers, ...props }) => {
+  // const [data, setData] = useState({});
 
-  const [data, setData] = useState({});
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await axios.get(
+  //       "https://run.mocky.io/v3/98cf16f5-ced6-40c2-b9c1-a4f684625e48"
+  //     );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(
-        "https://run.mocky.io/v3/98cf16f5-ced6-40c2-b9c1-a4f684625e48"
-      );
+  //     setData(response.data.tattooers[0]);
+  //   };
 
-      setData(response.data.tattooers[0]);
-    };
+  //   fetchData();
+  // });
 
-    fetchData();
-  });
-
-  const { fullName, category, bio, avatar, reviews, rating } = data;
+  const { fullName, category, bio, avatar, reviews, rating } = tattooers[0];
   return (
     <>
       <header>
@@ -124,7 +62,6 @@ const Artist = () => {
             <Button className="button--is-main is-first">Book Now</Button>
             <Button className="button">Follow</Button>
           </div>
-          <Gallery style={{ width: "100vw" }} photos={photos} />
         </div>
       ) : (
         <Loader />
@@ -133,4 +70,6 @@ const Artist = () => {
   );
 };
 
-export default Artist;
+const mapStateToProps = ({ tattooers }) => ({ tattooers });
+
+export default connect(mapStateToProps)(Artist);

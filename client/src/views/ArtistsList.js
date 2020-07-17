@@ -1,11 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import NavBar from "../molecules/NavBar";
 import Paragraph from "../components/Paragraph/Paragraph";
 import "./ArtistsList.scss";
-import { tattooers } from "../data/tattooers";
 import Card from "../molecules/Card/Card";
 
-const Artists = () => {
+const Artists = ({ tattooers, ...props }) => {
   return (
     <>
       <header>
@@ -16,13 +16,13 @@ const Artists = () => {
         <Paragraph>Warsaw</Paragraph>
         <Paragraph>Sort by Rating</Paragraph>
         <div className="grid-list">
-          {tattooers.map((artist) => (
-            <Card data={artist} />
-          ))}
+          <Card data={tattooers[0]} />
         </div>
       </section>
     </>
   );
 };
 
-export default Artists;
+const mapStateToProps = ({ tattooers }) => ({ tattooers });
+
+export default connect(mapStateToProps)(Artists);
