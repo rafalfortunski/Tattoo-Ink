@@ -20,24 +20,24 @@ const studio = {
       console.log("Studio saved:", newStudio);
     } catch (err) {
       console.log(err);
-      res.send(500);
+      res.status(500);
     }
   },
   getAllStudios: (req, res) => {
     Studio.find({})
       .then((results) => res.send(results))
-      .catch((err) => res.send(404));
+      .catch((err) => res.status(404));
   },
   getSingleStudio: (req, res) => {
     Studio.findOne({ slug: req.params.slug })
       .then((result) => {
         if (!result) {
-          res.send(404);
+          res.status(404);
         } else {
           res.send(result);
         }
       })
-      .catch((err) => res.send(404));
+      .catch((err) => res.status(404));
   },
   updateStudio: (req, res) => {
     const updatedStudioData = {
@@ -47,18 +47,18 @@ const studio = {
     };
     Studio.findOneAndUpdate({ slug: req.params.slug }, updatedStudioData)
       .then((updatedStudio) => res.send(updatedStudio))
-      .catch((err) => res.send(404));
+      .catch((err) => res.status(404));
   },
   deleteStudio: (req, res) => {
     Studio.findByOneAndDelete({ slug: req.params.slug })
       .then((result) => {
         if (!result) {
-          res.send(404);
+          res.status(404);
         } else {
-          res.send(200);
+          res.status(200);
         }
       })
-      .catch((err) => res.send(500));
+      .catch((err) => res.status(500));
   },
 };
 

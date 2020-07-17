@@ -23,8 +23,6 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 mongoose.connect(process.env.DB_CONNECT, {
   useNewUrlParser: true,
