@@ -1,8 +1,11 @@
 import React from "react";
 import NavBar from "../molecules/NavBar";
-import { Formik, Form } from "formik";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Formik } from "formik";
+import { authenticate as authAction } from "../actions";
 
-const Login = () => {
+const Login = ({ user, authenticate }) => {
   return (
     <header>
       <NavBar isInverted />
@@ -19,11 +22,8 @@ const Login = () => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={({ email, password }) => {
+          authenticate(email, password);
         }}
       >
         {({
@@ -35,32 +35,43 @@ const Login = () => {
           handleSubmit,
           isSubmitting,
           /* and other goodies */
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
-            {errors.email && touched.email && errors.email}
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
-            {errors.password && touched.password && errors.password}
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
-          </form>
-        )}
+        }) => {
+          if (user) {
+            return <Redirect to="/" />;
+          }
+          return (
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+              {errors.email && touched.email && errors.email}
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
+              {errors.password && touched.password && errors.password}
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
+            </form>
+          );
+        }}
       </Formik>
     </header>
   );
 };
 
-export default Login;
+const mapStateToProps = ({ user = null }) => ({ user });
+
+const mapDispatchToProps = (dispatch) => ({
+  authenticate: (email, password) => dispatch(authAction(email, password)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

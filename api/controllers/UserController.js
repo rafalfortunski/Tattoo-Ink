@@ -18,7 +18,7 @@ const user = {
     if (!validPassword) return res.status(400).send("Invalid password.");
 
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header("auth-token", token).send(token);
+    res.header("auth-token", token).send({ token, email: user.email });
   },
 
   userLogout: (req, res) => {
@@ -27,13 +27,14 @@ const user = {
   },
 
   userRegister: async (req, res) => {
-    const emailExist = await User.findOne({ email: req.body.email });
-    if (emailExist) return res.status(400).send("Email already exists.");
+    // const emailExist = await User.findOne({ email: req.body.email });
+    // if (emailExist) return res.status(400).send("Email already exists.");
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     const user = await new User({
+      username: req.body.name,
       email: req.body.email,
       password: hashedPassword,
     });

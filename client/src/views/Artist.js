@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import Gallery from "react-photo-gallery";
 import BackgroundImage from "../components/BackgroundImage/BackgroundImage";
 import Title from "../components/Title/Title";
 import Button from "../components/Button/Button";

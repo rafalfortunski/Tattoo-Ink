@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { HashRouter as Router, NavLink, Link } from "react-router-dom";
 import "./NavBar.scss";
 import squaredMenu from "./menu.svg";
 import squaredMenuWhite from "./menu-white.svg";
 
-const NavBar = ({ isInverted }) => {
+const NavBar = ({ isInverted, user, ...props }) => {
   const [sideMenuVisibility, setSideMenuVisibility] = useState(false);
   return (
     <>
@@ -77,24 +78,30 @@ const NavBar = ({ isInverted }) => {
         ) : null}
         <div className="menu">
           <span>Logo</span>
-          <Router>
-            <ul className={`menu__list ${isInverted ? "is-inverted" : null}`}>
-              <li className="menu__item">
-                <NavLink to="/login" className="menu__link">
-                  Log In
-                </NavLink>
-              </li>
-              <li className="menu__item">
-                <NavLink to="/signup" className="menu__link">
-                  Sign Up
-                </NavLink>
-              </li>
-            </ul>
-          </Router>
+          {!user ? (
+            <Router>
+              <ul className={`menu__list ${isInverted ? "is-inverted" : null}`}>
+                <li className="menu__item">
+                  <NavLink to="/login" className="menu__link">
+                    Log In
+                  </NavLink>
+                </li>
+                <li className="menu__item">
+                  <NavLink to="/signup" className="menu__link">
+                    Sign Up
+                  </NavLink>
+                </li>
+              </ul>
+            </Router>
+          ) : (
+            <p>{user.email}</p>
+          )}
         </div>
       </nav>
     </>
   );
 };
 
-export default NavBar;
+const mapStateToProps = ({ user }) => ({ user });
+
+export default connect(mapStateToProps)(NavBar);

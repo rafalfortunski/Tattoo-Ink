@@ -1,4 +1,10 @@
-import store from "../store";
+
+import {
+  AUTH_SUCCESS,
+  AUTH_FAILURE,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
+} from "../actions";
 
 const initialState = {
   tattooers: [
@@ -17,7 +23,28 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        user: {
+          token: action.payload.data.token,
+          email: action.payload.data.email,
+        },
+      };
+
+    case AUTH_FAILURE:
+      return state;
+
+    case REGISTER_SUCCESS:
+      return state;
+
+    case REGISTER_FAILURE:
+      return state;
+
+    default:
+      return state;
+  }
 };
 
 export default rootReducer;

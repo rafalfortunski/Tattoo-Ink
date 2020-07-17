@@ -20,7 +20,7 @@ function Root() {
           <Route exact path="/artists" component={ArtistsList} />
           <Route path="/artists/:id" component={Artist} />
           <Route path="/login" component={Login} />
-          <Route path="/sign-up" component={Register} />
+          <Route path="/signup" component={Register} />
         </Switch>
       </Router>
     </Provider>

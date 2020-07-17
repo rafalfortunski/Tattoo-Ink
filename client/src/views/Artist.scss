@@ -14,14 +14,8 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: 50% 50%;
-      filter: saturate(140%);
-      &:after {
-        content: "";
-        position: absolute;
-        width: 30vw;
-        height: 40vw;
-        background: rgba(225, 0, 0, 0.55);
-      }
+      background-color: red;
+      background-blend-mode: multiply;
     }
   }
 }
