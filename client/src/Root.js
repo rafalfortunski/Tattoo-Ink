@@ -9,6 +9,7 @@ import Artist from "./views/Artist";
 import About from "./views/About";
 import Login from "./views/Login";
 import Register from "./views/Register";
+import Profile from "./views/Profile";
 
 function Root() {
   return (
@@ -21,6 +22,7 @@ function Root() {
           <Route path="/artists/:id" component={Artist} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Register} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </Router>
     </Provider>

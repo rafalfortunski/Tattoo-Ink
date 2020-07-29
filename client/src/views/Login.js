@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Formik } from "formik";
 import { authenticate as authAction } from "../actions";
 
-const Login = ({ user, authenticate }) => {
+const Login = ({ user, authenticate, history }) => {
   return (
     <header>
       <NavBar isInverted />
@@ -23,7 +23,7 @@ const Login = ({ user, authenticate }) => {
           return errors;
         }}
         onSubmit={({ email, password }) => {
-          authenticate(email, password);
+          authenticate(email, password, history);
         }}
       >
         {({
@@ -71,7 +71,8 @@ const Login = ({ user, authenticate }) => {
 const mapStateToProps = ({ user = null }) => ({ user });
 
 const mapDispatchToProps = (dispatch) => ({
-  authenticate: (email, password) => dispatch(authAction(email, password)),
+  authenticate: (email, password, history) =>
+    dispatch(authAction(email, password, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

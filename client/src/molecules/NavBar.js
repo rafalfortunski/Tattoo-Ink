@@ -96,18 +96,24 @@ const NavBar = ({ isInverted, user, logout, history, ...props }) => {
             </Router>
           ) : (
             <div className="usermenu">
-              <img src={user.avatar} className="usermenu__avatar" />
+              <img
+                src={user.avatar}
+                className="usermenu__avatar"
+                alt="user avatar"
+              />
               <p>{user.fullName}</p>
               <ul className="usermenu__list">
                 <li className="usermenu__item">
-                  <NavLink to="/settings">Your account</NavLink>
+                  <NavLink to="/profile">Your profile</NavLink>
                 </li>
                 <li className="usermenu__item">
                   <NavLink to="/settings">Add studio</NavLink>
                 </li>
                 <button
                   className="usermenu__item"
-                  onSubmit={() => logout(history)}
+                  onClick={() => {
+                    logout(history);
+                  }}
                 >
                   Logout
                 </button>
@@ -120,13 +126,10 @@ const NavBar = ({ isInverted, user, logout, history, ...props }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user = null }) => ({ user });
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: (history) => {
-    console.log(dispatch);
-    return dispatch(logoutAction(history));
-  },
+  logout: (history) => dispatch(logoutAction(history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

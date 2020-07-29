@@ -1,0 +1,20 @@
+.profile {
+  margin-left: 3em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2em;
+  &__top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+  }
+  &__details {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+  }
+  &__edit {
+    background: transparent;
+  }
+}

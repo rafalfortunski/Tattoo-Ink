@@ -39,6 +39,10 @@ const UserSchema = new Schema(
         ref: "users",
       },
     ],
+    isArtist: {
+      type: Boolean,
+      default: false,
+    },
     _studio: {
       type: Schema.Types.ObjectId,
       ref: "studios",

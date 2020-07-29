@@ -47,7 +47,8 @@ const rootReducer = (state = initialState, action) => {
 
     case LOGOUT_SUCCESS:
       return {
-        initialState,
+        ...state,
+        user: null,
       };
 
     case LOGOUT_FAILURE:
