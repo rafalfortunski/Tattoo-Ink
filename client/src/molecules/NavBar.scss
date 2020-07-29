@@ -22,7 +22,9 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 2em 4em;
+  padding: 1.5em 4em;
+  align-items: center;
+  height: 86px;
 
   &__list {
     list-style-type: none;
@@ -51,6 +53,36 @@
   &__link {
     text-decoration: none;
     color: inherit;
+  }
+  .usermenu {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+    &:hover {
+      .usermenu__list {
+        display: block;
+      }
+    }
+
+    &__list {
+      list-style-type: none;
+      position: absolute;
+      display: none;
+      top: 48px;
+      background: white;
+      border-radius: 5px;
+    }
+    &__item a {
+      text-decoration: none;
+      color: black;
+    }
+
+    &__avatar {
+      width: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
   }
 }
 

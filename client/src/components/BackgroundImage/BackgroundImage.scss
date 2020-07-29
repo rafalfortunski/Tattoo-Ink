@@ -1,1 +1,9 @@
-
+.image {
+  &--is_red {
+    background-color: red;
+    background-blend-mode: multiply;
+  }
+  &--is_greyscale {
+    filter: grayscale(1);
+  }
+}

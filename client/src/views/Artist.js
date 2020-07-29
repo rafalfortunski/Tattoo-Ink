@@ -32,7 +32,7 @@ const Artist = ({ tattooers, ...props }) => {
       {fullName ? (
         <div className="artist">
           <BackgroundImage
-            className="artist__avatar--is-red"
+            className="artist__avatar image--is-red"
             style={{
               backgroundImage: `url(${avatar})`,
             }}

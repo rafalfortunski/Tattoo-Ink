@@ -1,9 +1,10 @@
-
 import {
   AUTH_SUCCESS,
   AUTH_FAILURE,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 } from "../actions";
 
 const initialState = {
@@ -29,7 +30,9 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: {
           token: action.payload.data.token,
-          email: action.payload.data.email,
+          fullName: action.payload.data.user.fullName,
+          email: action.payload.data.user.email,
+          avatar: action.payload.data.user.avatar,
         },
       };
 
@@ -40,6 +43,14 @@ const rootReducer = (state = initialState, action) => {
       return state;
 
     case REGISTER_FAILURE:
+      return state;
+
+    case LOGOUT_SUCCESS:
+      return {
+        initialState,
+      };
+
+    case LOGOUT_FAILURE:
       return state;
 
     default:

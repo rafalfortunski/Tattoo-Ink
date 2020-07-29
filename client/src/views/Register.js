@@ -5,12 +5,12 @@ import { connect } from "react-redux";
 import { Formik } from "formik";
 import { register as registerAction } from "../actions";
 
-const Login = ({ user, register }) => {
+const Register = ({ user, register, history }) => {
   return (
     <header>
       <NavBar isInverted />
       <Formik
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ fullName: "", email: "", password: "" }}
         validate={(values) => {
           const errors = {};
           if (!values.email) {
@@ -22,8 +22,8 @@ const Login = ({ user, register }) => {
           }
           return errors;
         }}
-        onSubmit={({ name, email, password }) => {
-          register(name, email, password);
+        onSubmit={({ fullName, email, password }) => {
+          register(fullName, email, password, history);
         }}
       >
         {({
@@ -40,35 +40,41 @@ const Login = ({ user, register }) => {
             return <Redirect to="/" />;
           }
           return (
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="name"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.name}
-              />
-              {errors.name && touched.name && errors.name}
-              <input
-                type="email"
-                name="email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-              {errors.email && touched.email && errors.email}
-              <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-              {errors.password && touched.password && errors.password}
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
-            </form>
+            <section>
+              <h1>Register an account</h1>
+              <form onSubmit={handleSubmit}>
+                <label htmlFor="fullName">Full Name</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                {errors.name && touched.name && errors.name}
+                <label htmlFor="email">E-mail</label>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                {errors.email && touched.email && errors.email}
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+                {errors.password && touched.password && errors.password}
+                <button type="submit" disabled={isSubmitting}>
+                  Submit
+                </button>
+              </form>
+            </section>
           );
         }}
       </Formik>
@@ -81,8 +87,8 @@ const mapStateToProps = ({ user = null }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  register: (name, email, password) =>
-    dispatch(registerAction(name, email, password)),
+  register: (fullName, email, password, history) =>
+    dispatch(registerAction(fullName, email, password, history)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

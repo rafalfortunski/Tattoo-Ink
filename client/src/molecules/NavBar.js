@@ -4,8 +4,9 @@ import { HashRouter as Router, NavLink, Link } from "react-router-dom";
 import "./NavBar.scss";
 import squaredMenu from "./menu.svg";
 import squaredMenuWhite from "./menu-white.svg";
+import { logout as logoutAction } from "../actions";
 
-const NavBar = ({ isInverted, user, ...props }) => {
+const NavBar = ({ isInverted, user, logout, history, ...props }) => {
   const [sideMenuVisibility, setSideMenuVisibility] = useState(false);
   return (
     <>
@@ -94,7 +95,24 @@ const NavBar = ({ isInverted, user, ...props }) => {
               </ul>
             </Router>
           ) : (
-            <p>{user.email}</p>
+            <div className="usermenu">
+              <img src={user.avatar} className="usermenu__avatar" />
+              <p>{user.fullName}</p>
+              <ul className="usermenu__list">
+                <li className="usermenu__item">
+                  <NavLink to="/settings">Your account</NavLink>
+                </li>
+                <li className="usermenu__item">
+                  <NavLink to="/settings">Add studio</NavLink>
+                </li>
+                <button
+                  className="usermenu__item"
+                  onSubmit={() => logout(history)}
+                >
+                  Logout
+                </button>
+              </ul>
+            </div>
           )}
         </div>
       </nav>
@@ -104,4 +122,11 @@ const NavBar = ({ isInverted, user, ...props }) => {
 
 const mapStateToProps = ({ user }) => ({ user });
 
-export default connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = (dispatch) => ({
+  logout: (history) => {
+    console.log(dispatch);
+    return dispatch(logoutAction(history));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
