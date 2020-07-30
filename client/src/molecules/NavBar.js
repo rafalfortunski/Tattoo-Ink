@@ -107,15 +107,22 @@ const NavBar = ({ isInverted, user, logout, history, ...props }) => {
                   <NavLink to="/profile">Your profile</NavLink>
                 </li>
                 <li className="usermenu__item">
+                  <NavLink to="/following">Your follows</NavLink>
+                </li>
+                <li className="usermenu__item">
+                  <NavLink to="/favorites">Your favorites</NavLink>
+                </li>
+                <hr className="usermenu__line" />
+                <li className="usermenu__item">
                   <NavLink to="/settings">Add studio</NavLink>
                 </li>
                 <button
-                  className="usermenu__item"
+                  className="usermenu__item button--is_link"
                   onClick={() => {
                     logout(history);
                   }}
                 >
-                  Logout
+                  Sign out
                 </button>
               </ul>
             </div>

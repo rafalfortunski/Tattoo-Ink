@@ -57,8 +57,9 @@
   .usermenu {
     display: flex;
     align-items: center;
-    padding: 0;
+    padding: 10px 0;
     cursor: pointer;
+
     &:hover {
       .usermenu__list {
         display: block;
@@ -69,13 +70,47 @@
       list-style-type: none;
       position: absolute;
       display: none;
-      top: 48px;
+      top: 55px;
       background: white;
       border-radius: 5px;
-    }
-    &__item a {
-      text-decoration: none;
+      padding: 5px 0;
       color: black;
+      box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
+      &::before {
+        border: 6px solid transparent;
+        border-bottom-color: white;
+        position: absolute;
+        display: inline-block;
+        content: "";
+        top: -12px;
+        left: 14px;
+      }
+    }
+    &__item {
+      padding: 5px 60px 5px 20px;
+      &:hover {
+        background-color: black;
+        color: white;
+      }
+
+      &--is_main {
+        padding: 5px 60px 5px 20px;
+        background-color: black;
+        color: white;
+      }
+      a,
+      &--is_main a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+    &__line {
+      height: 1px;
+      border: 0;
+      border-top: 1px solid rgb(238, 238, 238);
+      background-color: rgb(238, 238, 238);
+      border-color: rgb(238, 238, 238);
+      color: rgb(238, 238, 238);
     }
 
     &__avatar {
@@ -85,7 +120,17 @@
     }
   }
 }
-
+.button--is_link {
+  color: black;
+  background-color: white;
+  font-size: 15px;
+  width: 100%;
+  text-align: left;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+}
 .sidemenu {
   position: absolute;
   display: flex;
